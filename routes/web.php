@@ -24,6 +24,10 @@ Route::get('test', function(){
     return view('test');
 })->name('TEST');
 
+Route::get('ajouter', function(){
+    return view('ajouter');
+})->name('ajouter');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

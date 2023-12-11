@@ -4,6 +4,7 @@
     </head>
 
     <script src="{{ asset('js/app.js') }}" defer></script>
+
     @yield('scripts')
 
     <!-- Styles -->
@@ -111,6 +112,7 @@ line-height: 1.05;
         {
             text-align:left;
         }
+
 
 
 

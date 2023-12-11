@@ -35,7 +35,7 @@
         }
 
         #images {
-            width: 50rem;
+            width: 40rem;
 
         }
 

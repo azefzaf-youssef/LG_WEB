@@ -12057,3 +12057,58 @@ textarea.form-control-lg {
   color: var(--tmp-color-bleu-marine);
 }
 
+.md-fab-wrapper {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1004;
+  transition: margin 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.md-fab {
+  box-sizing: border-box;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #fff;
+  color: #727272;
+  display: block;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+}
+
+.md-fab:hover,
+.md-fab:focus,
+.md-fab:active {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.md-fab-primary {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.md-fab-success {
+  background: var(--success);
+  color: var(--white);
+}
+
+.md-fab-secondary {
+  background: var(--secondary);
+  color: var(--white);
+}
+
+.md-fab-light {
+  background: var(--light);
+  color: var(--white);
+}
+
+.md-fab-dark {
+  background: var(--dark);
+  color: var(--white);
+}
+
