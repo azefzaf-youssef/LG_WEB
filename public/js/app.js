@@ -3028,7 +3028,6 @@ __webpack_require__.r(__webpack_exports__);
 
 window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()); // Make Swal global
 window.Modal = bootstrap__WEBPACK_IMPORTED_MODULE_2__.Modal; // Make Modal global
-console.log(bootstrap__WEBPACK_IMPORTED_MODULE_2__.Modal);
 
 /***/ }),
 
