@@ -25,6 +25,7 @@ $btn-border-radius:3px;
 // Import Bootstrap source files
 @import 'bootstrap/scss/bootstrap';
 
+
 .btn-orange {
     background-color: var(--tmp-color-orange); // Your custom button color
     color:var(--tmp-color-white);
@@ -94,14 +95,14 @@ $btn-border-radius:3px;
   }
 
 
-//   card 
+//   card
 
 
   .card-title{
       color : var(--tmp-color-bleu-marine);
   }
 
-  
+
 
   .card-text{
     color : var(--tmp-color-bleu-marine);

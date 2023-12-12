@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\Langue;
 
 class HomeController extends Controller
 {
@@ -26,6 +27,7 @@ class HomeController extends Controller
     {
         $data = [];
         $data['user']=Auth::user();
+        $data['langues']=Langue::all();
         return view('home')->with($data);
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Services\Utilisateur\UtilisateurService;
+use App\Services\Utilisateur\UtilisateurServiceImpl;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -12,6 +14,10 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
+        $app = $this->app;
+
+        $app->bind(UtilisateurService::class, UtilisateurServiceImpl::class);
+
     }
 
     /**
@@ -20,5 +26,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+
     }
 }

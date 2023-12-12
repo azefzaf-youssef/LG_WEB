@@ -31,7 +31,9 @@ Artisan::command('BDD', function () {
 
         $table->increments('id');
         $table->unsignedInteger('id_langue');
+        $table->unsignedInteger('id_user');
         $table->longText('titre');
+        $table->string('path_illustration');
         $table->timestamps();
         $table->softDeletes();
 
@@ -49,35 +51,44 @@ Artisan::command('BDD', function () {
     DB::table('langue')->insert([
         'langue' => 'Anglais',
     ]);
-DB::table('langue')->insert([
+
+    DB::table('langue')->insert([
         'langue' => 'Mandarin',
     ]);
-DB::table('langue')->insert([
+
+    DB::table('langue')->insert([
         'langue' => 'Hindi',
     ]);
-DB::table('langue')->insert([
+
+    DB::table('langue')->insert([
         'langue' => 'Espagnol',
     ]);
-DB::table('langue')->insert([
+
+    DB::table('langue')->insert([
         'langue' => 'Arabe',
     ]);
-DB::table('langue')->insert([
+
+    DB::table('langue')->insert([
         'langue' => 'Bengali',
     ]);
-DB::table('langue')->insert([
+
+    DB::table('langue')->insert([
         'langue' => 'Français',
     ]);
-DB::table('langue')->insert([
+
+    DB::table('langue')->insert([
         'langue' => 'Russe',
     ]);
-DB::table('langue')->insert([
+
+    DB::table('langue')->insert([
         'langue' => 'Portugais',
     ]);
-DB::table('langue')->insert([
+
+    DB::table('langue')->insert([
         'langue' => 'Ourdou',
     ]);
 
-    
+
 
 });
 

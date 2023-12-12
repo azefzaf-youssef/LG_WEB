@@ -31,3 +31,10 @@ Route::get('ajouter', function(){
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::prefix('utilisateur')->group(function () {
+
+    Route::post('/new', [App\Http\Controllers\UserController::class, 'addPost'])->name('USER-LOGGED-ADD-POST');
+    Route::get('/index', [App\Http\Controllers\UserController::class, 'index'])->name('USER-LOGGED-INDEX');
+
+});
