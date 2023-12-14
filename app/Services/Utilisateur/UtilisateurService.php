@@ -6,4 +6,7 @@ interface UtilisateurService
 {
 
     public function addPostIllustration($request);
+
+    public function deleteIllustration($id);
+
 }

@@ -32,9 +32,13 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+
 Route::prefix('utilisateur')->group(function () {
 
     Route::post('/new', [App\Http\Controllers\UserController::class, 'addPost'])->name('USER-LOGGED-ADD-POST');
     Route::get('/index', [App\Http\Controllers\UserController::class, 'index'])->name('USER-LOGGED-INDEX');
+    Route::delete('/delete/{id}', [App\Http\Controllers\UserController::class, 'deleteIllustration'])->name('USER-LOGGED-DELETE-ILUSTRATION');
+
 
 });

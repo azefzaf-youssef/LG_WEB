@@ -1,9 +1,8 @@
 @extends('layout.master')
 
 @section('content')
-    <div class="container">
 
-        <div class="container bg-white p-5 rounded-left shadow ">
+        <div class="container bg-white p-5 rounded shadow ">
             <div class="title-2 pb-4">Termenoligie</div>
 
 
@@ -22,7 +21,6 @@
 
             </div>
         </div>
-    </div>
     </div>
 @endsection
 
@@ -76,7 +74,7 @@
             let div = document.createElement("div");
             let span = document.createElement("span");
 
-            if (rect.left > XX - 50) {
+            if (event.clientX < screen.width/2 ) {
 
                 div.innerHTML += "";
                 div.classList.add("line")

@@ -92,6 +92,9 @@
                         });
 
                         myModal.hide();
+
+                        window.location.reload();
+
                     } else {
 
                         var response = JSON.parse(xhr.responseText);

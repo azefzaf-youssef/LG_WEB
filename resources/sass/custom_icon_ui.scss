@@ -1,0 +1,55 @@
+.icon-style
+{
+    height: 25px;
+}
+.icon-style-btn
+{
+    height: 25px;
+    cursor: pointer;
+}
+
+.icon-style-btn-Large
+{
+    height: 55px;
+    cursor: pointer;
+}
+.icon-danger {
+    color: var(--danger);
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+
+  .icon-secondary {
+    color: var(--secondary);
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+
+  .icon-primary {
+    color: var(--primary);
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+
+  .icon-success {
+    color: var(--success);
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+
+  .icon-info {
+    color: var(--info);
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+  .icon-warning {
+    color: var(--warning);
+    &:hover {
+      opacity: 0.6;
+    }
+  }

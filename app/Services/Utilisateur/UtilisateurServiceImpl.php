@@ -13,6 +13,7 @@ class UtilisateurServiceImpl implements UtilisateurService
         $illustration = new Illustration();
         $path = 'public/illustrattion/' . date('y-m-d');
         $rs = \Storage::putFile($path, $request->file('illustration'));
+        $rs = str_replace("public", "storage", $rs);
         $illustration->path_illustration = $rs ;
         $illustration->titre = $request->get('titre') ;
         $illustration->id_langue = $request->get('langue') ;
@@ -25,9 +26,20 @@ class UtilisateurServiceImpl implements UtilisateurService
         }
         return false;
 
+    }
 
 
+    public function deleteIllustration($id){
+
+        $illustration = Illustration::find($id);
+        if($illustration->delete())
+        {
+            return true;
+
+        }
+        return false;
 
     }
+
 
 }
