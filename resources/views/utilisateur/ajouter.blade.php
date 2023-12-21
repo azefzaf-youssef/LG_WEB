@@ -82,7 +82,11 @@
             xhr.open('POST', url, true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4) {
+                    console.log(xhr.status);
+
                     if (xhr.status == 200) {
+
+                        console.log(xhr.responseText);
                         var response = JSON.parse(xhr.responseText);
 
                         Swal.fire({
@@ -99,19 +103,21 @@
 
                         var response = JSON.parse(xhr.responseText);
 
-                        var string_error = '<b>les données fournies ne sont pas valides </b><br>';
+                        var string_error = '<b>Les données fournies ne sont pas valides </b><br>';
 
-                        for (var key in response.errors) {
-                            if (response.errors.hasOwnProperty(key)) {
-                                string_error += '<br>' + response.errors[key][0];
+                        for (var key in response) {
+                            if (response.hasOwnProperty(key)) {
+                                string_error += '<br>' + response[key][0];
                             }
                         }
 
-                        Swal({
-                            type: 'error',
+                        console.log(response);
+                        Swal.fire({
+                            title: "Erreur!",
                             html: string_error,
-                            title: response.translations.validation,
+                            icon: "error"
                         });
+
 
                     }
                 }

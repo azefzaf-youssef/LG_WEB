@@ -32,7 +32,7 @@ Artisan::command('BDD', function () {
         $table->increments('id');
         $table->unsignedInteger('id_langue');
         $table->unsignedInteger('id_user');
-        $table->longText('titre');
+        $table->string('titre')->unique();
         $table->string('path_illustration');
         $table->timestamps();
         $table->softDeletes();

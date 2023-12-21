@@ -2,6 +2,9 @@
 @section('scripts')
 @endsection
 @section('content')
+<div class="container bg-white p-4 mb-3  rounded text-center ">
+    <h3>Liste des illustrations </h3>
+</div>
     <div class="container bg-white p-5 rounded ">
 
         @if ($illustrations->count())

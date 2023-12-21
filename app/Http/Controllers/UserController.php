@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Auth;
 use App\Models\Langue;
 use App\Models\Illustration;
-use Auth;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use App\Http\Requests\IllustrationRequest;
 use  App\Services\Utilisateur\UtilisateurService;
 
 class UserController extends Controller
@@ -29,15 +31,29 @@ class UserController extends Controller
         return view('utilisateur.index')->with($data);
     }
 
-    public function addPost(Request $request)
+    public function addPost(IllustrationRequest $request)
     {
-        return response()->json([$this->utilisateurService->addPostIllustration($request)]);
+
+        return $this->utilisateurService->addPostIllustration($request);
 
     }
 
     public function deleteIllustration($id)
     {
         return response()->json([$this->utilisateurService->deleteIllustration($id)]);
+
+    }
+
+    public function afficherIllustration($id)
+    {
+
+        return view('utilisateur.affichage_composant')->with($data);
+
+    }
+
+    public function addComposantIllustration($id)
+    {
+        return view('utilisateur.add_composant')->with($data);
 
     }
 }

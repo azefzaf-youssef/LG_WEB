@@ -10,6 +10,8 @@ class UtilisateurServiceImpl implements UtilisateurService
 
     public function addPostIllustration($request){
 
+       try {
+
         $illustration = new Illustration();
         $path = 'public/illustrattion/' . date('y-m-d');
         $rs = \Storage::putFile($path, $request->file('illustration'));
@@ -19,12 +21,17 @@ class UtilisateurServiceImpl implements UtilisateurService
         $illustration->id_langue = $request->get('langue') ;
         $illustration->id_user = Auth::user()->id;
 
-        if($illustration->save())
-        {
-            return true;
+        $illustration->save();
+
+        return response()->json(['message'],200) ;
+
+
+       }
+        catch (\Throwable $th) {
+            //throw $th;
+        return response()->json(['error'=>$th],400) ;
 
         }
-        return false;
 
     }
 

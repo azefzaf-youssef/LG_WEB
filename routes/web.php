@@ -39,6 +39,8 @@ Route::prefix('utilisateur')->group(function () {
     Route::post('/new', [App\Http\Controllers\UserController::class, 'addPost'])->name('USER-LOGGED-ADD-POST');
     Route::get('/index', [App\Http\Controllers\UserController::class, 'index'])->name('USER-LOGGED-INDEX');
     Route::delete('/delete/{id}', [App\Http\Controllers\UserController::class, 'deleteIllustration'])->name('USER-LOGGED-DELETE-ILUSTRATION');
+    Route::get('/add/{id}', [App\Http\Controllers\UserController::class, 'addComposantIllustration'])->name('USER-LOGGED-ADD-COMPOSANT-ILUSTRATION');
+    Route::get('/voir/{id}', [App\Http\Controllers\UserController::class, 'afficherIllustration'])->name('USER-LOGGED-AFFICHER-ILUSTRATION');
 
 
 });
