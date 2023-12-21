@@ -48,5 +48,19 @@ class UtilisateurServiceImpl implements UtilisateurService
 
     }
 
+    public function getIllustration($id)
+    {
+        return Illustration::find($id);
+    }
+
+    public function getListPaginationIllustrationByUser($id,$pagination)
+    {
+        return Illustration::where('id_user',$id)->paginate(6);
+    }
+
+    public function getListPaginationIllustration($pagination)
+    {
+        return Illustration::paginate(6);
+    }
 
 }

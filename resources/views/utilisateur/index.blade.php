@@ -12,7 +12,7 @@
                 @foreach ($illustrations as $illustration)
                     <div class="col-lg-4">
                         <div class="card mt-2 ">
-                            <a href="{{ route('TEST') }}" class="text-decoration-none">
+                            <a href="{{ route('USER-LOGGED-AFFICHER-ILUSTRATION',$illustration->id) }}" class="text-decoration-none">
                                 <img src="{{ asset($illustration->path_illustration) }}" class="card-img-top curor-pointer"
                                     alt="...">
                             </a>
@@ -22,7 +22,7 @@
                                 </a>
                                 <div class="card-text" style="float: right">
                                     <x-iconpark-targettwo class="icon-style-btn icon-warning" />
-                                    <x-carbon-edit class="icon-style-btn icon-secondary" />
+                                    <a href="{{route('USER-LOGGED-ADD-COMPOSANT-ILUSTRATION',$illustration->id)}}"><x-carbon-edit class="icon-style-btn icon-secondary" /></a>
                                     {{-- <x-pepicon-loop class="icon-style-btn icon-success" /> --}}
                                     <x-carbon-translate class="icon-style-btn icon-info" />
                                     <x-carbon-close class="icon-style-btn icon-danger" />

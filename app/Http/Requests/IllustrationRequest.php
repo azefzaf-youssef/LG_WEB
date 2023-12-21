@@ -10,7 +10,7 @@ class IllustrationRequest extends FormRequest
 {
 
     private $rules = [
-        'titre' => 'required',
+        'titre' => 'required|unique:illustration,titre,except,id',
         'langue' => 'required',
         'illustration' => 'required|mimes:png,jpeg,jpg'
     ];
@@ -32,6 +32,23 @@ class IllustrationRequest extends FormRequest
     {
         // Merge the additional 'langue' rule with the existing rules
         return $this->rules;
+    }
+
+    /**
+     * Custom message for validation
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+
+            'titre' => '" Titre "',
+            'langue' => '" Langue "',
+            'illustration' => '" Illustration "'
+
+
+        ];
     }
 
     protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)

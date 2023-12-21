@@ -26,7 +26,7 @@ class UserController extends Controller
         $data = $this->data ;
         $data['user'] =$user= Auth::user();
         $data['langues'] = Langue::all();
-        $data['illustrations'] = Illustration::where('id_user',$user->id)->paginate(6);
+        $data['illustrations'] = $this->utilisateurService->getListPaginationIllustrationByUser($user->id,6);
 
         return view('utilisateur.index')->with($data);
     }
@@ -47,12 +47,16 @@ class UserController extends Controller
     public function afficherIllustration($id)
     {
 
+        $data = $this->data ;
+        $data['illustration']=$this->utilisateurService->getIllustration($id);
         return view('utilisateur.affichage_composant')->with($data);
 
     }
 
     public function addComposantIllustration($id)
     {
+        $data = $this->data ;
+        $data['illustration']=$this->utilisateurService->getIllustration($id);
         return view('utilisateur.add_composant')->with($data);
 
     }
