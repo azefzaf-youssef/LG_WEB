@@ -12,7 +12,7 @@
             <div class="col  ps-0  ">
                 <ul class="list-group shadow ">
                     <li class="list-group-item hover-composant ">An active item</li>
-                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item" > <span contenteditable="true"> A second item </span></li>
                     <li class="list-group-item">A third item</li>
                     <li class="list-group-item">A fourth item</li>
                     <li class="list-group-item">And a fifth one</li>

@@ -1,6 +1,10 @@
 @extends('layout.master')
 
 @section('content')
+    <div class="container  p-3 header-block  rounded mb-4  shadow">
+        <h4> Titre : <i>{{ $illustration->titre }} </i></h4>
+        Langue : <span>{{ $illustration->langue->langue }}</span><br>
+    </div>
     <div class="container bg-white p-5 rounded shadow ">
         <div class="title-2 pb-4">Termenoligie</div>
 
@@ -22,7 +26,8 @@
     </div>
 
     <div class="md-fab-wrapper">
-        <x-heroicon-s-check-circle class="icon-style-btn-Large icon-success " id="post-composant" data-url="{{route('USER-LOGGED-POST-ADD-COMPOSANT-ILUSTRATION')}}"/>
+        <x-heroicon-s-check-circle class="icon-style-btn-Large icon-success " id="post-composant"
+            data-url="{{ route('USER-LOGGED-POST-ADD-COMPOSANT-ILUSTRATION') }}" />
     </div>
 
     </div>
@@ -183,7 +188,7 @@
                     return description;
                 }
 
-                function generateLine(YY, XX, element ,rect = null, right = false) {
+                function generateLine(YY, XX, element, rect = null, right = false) {
 
                     let div = document.createElement("div");
 
@@ -260,7 +265,7 @@
                             description = generateDescription(element, YY, XX, rect, true)
                             line.appendChild(description);
 
-                            div = generateLine(YY ,XX,element, rect,true);
+                            div = generateLine(YY, XX, element, rect, true);
                             line.appendChild(div);
 
                             span = generateDot(YY, XX);
@@ -287,8 +292,8 @@
 
 
                 var formData = new FormData();
-                formData.append('composants',JSON.stringify(composant));
-                formData.append('id',"{{$illustration->id}}");
+                formData.append('composants', JSON.stringify(composant));
+                formData.append('id', "{{ $illustration->id }}");
                 var xhr = new XMLHttpRequest();
                 var url = this.dataset.url;
                 xhr.open('POST', url, true);

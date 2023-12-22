@@ -111,13 +111,15 @@
         </nav>
 
 <style>
-    nav{
 
-        background-color: #ffffff;
-    }
-    .navbar-brand , .navbar-collapse,.navbar-item,.dropdown-item,.nav-link
+    .navbar-brand , .navbar-collapse,.navbar-item,.nav-link
     {
         color: #ffffff !important;
+
+    }
+
+    .dropdown-item{
+        color: #4b4660 !important;
 
     }
 

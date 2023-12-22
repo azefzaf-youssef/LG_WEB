@@ -1,6 +1,10 @@
 @extends('layout.master')
 
 @section('content')
+<div class="container  p-3 header-block  rounded mb-4  shadow">
+    <h4> Titre : <i>{{ $illustration->titre }} </i></h4>
+    Langue : <span>{{ $illustration->langue->langue }}</span><br>
+</div>
     <div class="container bg-white p-5 rounded shadow ">
         <div class="title-2 pb-4">Termenoligie</div>
 
