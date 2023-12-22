@@ -25,6 +25,29 @@ $btn-border-radius:3px;
 // Import Bootstrap source files
 @import 'bootstrap/scss/bootstrap';
 
+.header-block {
+
+    background-color: #4b4660;
+    color: var(--tmp-color-white);
+}
+.tmp-color-bleu-marine-color{
+    color: var(--tmp-color-bleu-marine) !important;
+
+}
+.tmp-color-bleu-marine-bg{
+    background-color: var(--tmp-color-bleu-marine) !important;
+
+}
+.white-color {
+
+    color:var(--tmp-color-white) !important;
+
+}
+.white-bg {
+
+    background-color:var(--tmp-color-white) !important;
+
+}
 .pagination {
     float: right;
     padding-top: 5px

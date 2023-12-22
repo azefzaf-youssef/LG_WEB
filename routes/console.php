@@ -24,6 +24,7 @@ Artisan::command('BDD', function () {
     Schema::disableForeignKeyConstraints();
     Schema::dropIfExists('illustration');
     Schema::dropIfExists('Langue');
+    Schema::dropIfExists('traduction');
     Schema::enableForeignKeyConstraints();
 
 
@@ -88,7 +89,18 @@ Artisan::command('BDD', function () {
         'langue' => 'Ourdou',
     ]);
 
+    Schema::create('traduction', function (Blueprint $table) {
 
+        $table->increments('id');
+        $table->unsignedInteger('id_langue');
+        $table->unsignedInteger('id_user');
+        $table->unsignedInteger('id_illustration');
+        $table->longText('composants_json');
+        $table->tinyInteger('default')->default(0);
+        $table->timestamps();
+        $table->softDeletes();
+
+    });
 
 });
 

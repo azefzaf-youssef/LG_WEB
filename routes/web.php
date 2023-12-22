@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('HOME');
 Route::get('button', function(){
     return view('button');
 })->name('BUTTON');
@@ -30,7 +27,6 @@ Route::get('ajouter', function(){
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 
@@ -40,7 +36,14 @@ Route::prefix('utilisateur')->group(function () {
     Route::get('/index', [App\Http\Controllers\UserController::class, 'index'])->name('USER-LOGGED-INDEX');
     Route::delete('/delete/{id}', [App\Http\Controllers\UserController::class, 'deleteIllustration'])->name('USER-LOGGED-DELETE-ILUSTRATION');
     Route::get('/add/{id}', [App\Http\Controllers\UserController::class, 'addComposantIllustration'])->name('USER-LOGGED-ADD-COMPOSANT-ILUSTRATION');
+    Route::get('/edit/{id}', [App\Http\Controllers\UserController::class, 'editComposantIllustration'])->name('USER-LOGGED-EDIT-COMPOSANT-ILUSTRATION');
     Route::get('/voir/{id}', [App\Http\Controllers\UserController::class, 'afficherIllustration'])->name('USER-LOGGED-AFFICHER-ILUSTRATION');
+    Route::post('/postComposant', [App\Http\Controllers\UserController::class, 'postAddComposantIllustration'])->name('USER-LOGGED-POST-ADD-COMPOSANT-ILUSTRATION');
 
 
 });
+
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('HOME');
+
+

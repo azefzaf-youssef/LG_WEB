@@ -5,17 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Langue;
+use  App\Services\Utilisateur\UtilisateurService;
+
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
+    private $utilisateurService;
+    private $data;
+
+    public function __construct(UtilisateurService $utilisateurService) {
+        $this->data = [];
+        $this->utilisateurService = $utilisateurService;
     }
 
     /**
@@ -25,9 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data = [];
-        $data['user']=Auth::user();
-        $data['langues']=Langue::all();
+        $data = $this->data ;
+        $data['illustrations'] = $this->utilisateurService->getListPaginationIllustration(6);
         return view('home')->with($data);
     }
 }

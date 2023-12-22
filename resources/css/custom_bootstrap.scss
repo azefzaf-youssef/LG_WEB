@@ -25,8 +25,9 @@ $btn-border-radius:3px;
 // Import Bootstrap source files
 @import 'bootstrap/scss/bootstrap';
 
+
 .btn-orange {
-    background-color: var(--tmp-color-orange); // Your custom button color
+    background-color: var(--tmp-color-orange);
     color:var(--tmp-color-white);
     &:hover {
       color: var(--tmp-color-orange);
