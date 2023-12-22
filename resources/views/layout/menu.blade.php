@@ -40,7 +40,7 @@
     </div>
   </div>
 </nav> --}}
-<nav class="navbar shadow navbar-expand-md navbar-light bg-white ">
+<nav class="navbar shadow navbar-expand-md navbar-light header-block ">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('HOME') }}">
                     LGW
@@ -117,7 +117,7 @@
     }
     .navbar-brand , .navbar-collapse,.navbar-item,.dropdown-item,.nav-link
     {
-        color: #170657 !important;
+        color: #ffffff !important;
 
     }
 

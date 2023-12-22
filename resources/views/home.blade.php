@@ -3,7 +3,7 @@
 @endsection
 @section('content')
 
-<div class="container bg-white p-2 mb-3  rounded text-center shadow ">
+<div class="container header-block p-2 mb-3  rounded text-center shadow ">
     <h5>Illustrations </h5>
 </div>
     <div class="container bg-white p-5 rounded shadow ">
