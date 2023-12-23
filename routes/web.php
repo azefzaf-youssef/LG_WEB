@@ -39,6 +39,7 @@ Route::prefix('utilisateur')->group(function () {
     Route::get('/edit/{id}', [App\Http\Controllers\UserController::class, 'editComposantIllustration'])->name('USER-LOGGED-EDIT-COMPOSANT-ILUSTRATION');
     Route::get('/voir/{id}', [App\Http\Controllers\UserController::class, 'afficherIllustration'])->name('USER-LOGGED-AFFICHER-ILUSTRATION');
     Route::post('/postComposant', [App\Http\Controllers\UserController::class, 'postAddComposantIllustration'])->name('USER-LOGGED-POST-ADD-COMPOSANT-ILUSTRATION');
+    Route::post('/postEditComposant', [App\Http\Controllers\UserController::class, 'postEditComposantIllustration'])->name('USER-LOGGED-POST-EDIT-COMPOSANT-ILUSTRATION');
 
 
 });

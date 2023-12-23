@@ -90,8 +90,7 @@
                         var response = JSON.parse(xhr.responseText);
 
                         Swal.fire({
-                            title: "Good job!",
-                            text: "You clicked the button!",
+                            title: "Action effectuée avec succès!",
                             icon: "success"
                         });
 

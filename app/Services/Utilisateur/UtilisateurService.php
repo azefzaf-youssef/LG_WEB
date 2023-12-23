@@ -15,4 +15,7 @@ interface UtilisateurService
 
     public function getListPaginationIllustration($pagination);
 
+    public function addComposants($request);
+
+
 }

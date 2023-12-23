@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('content')
     <div class="container header-block p-2 mb-3  rounded text-center shadow ">
-         <h5>Mes illustrations </h5>
+        <h5>Mes illustrations </h5>
     </div>
     <div class="container bg-white p-5 rounded shadow ">
 
@@ -21,8 +21,11 @@
                                     <h5 class="card-title curor-pointer">{{ $illustration->titre }}</h5>
                                 </a>
                                 <div class="card-text" style="float: right">
-                                    <a href="{{ route('USER-LOGGED-ADD-COMPOSANT-ILUSTRATION', $illustration->id) }}"><x-iconpark-targettwo
-                                            class="icon-style-btn icon-warning" /></a>
+                                    @if (count($illustration->getComposantLangueDefault()) == 0)
+                                        <a href="{{ route('USER-LOGGED-ADD-COMPOSANT-ILUSTRATION', $illustration->id) }}"><x-iconpark-targettwo
+                                                class="icon-style-btn icon-warning" /></a>
+                                    @endif
+
                                     <a href="{{ route('USER-LOGGED-EDIT-COMPOSANT-ILUSTRATION', $illustration->id) }}"><x-carbon-edit
                                             class="icon-style-btn icon-secondary" /></a>
                                     {{-- <x-pepicon-loop class="icon-style-btn icon-success" /> --}}
@@ -30,6 +33,7 @@
                                     <x-carbon-close
                                         data-url="{{ route('USER-LOGGED-DELETE-ILUSTRATION', $illustration->id) }}"
                                         class="icon-style-btn icon-danger delete-illustration" />
+
                                 </div>
 
                             </div>

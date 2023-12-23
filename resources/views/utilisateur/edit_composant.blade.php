@@ -6,16 +6,18 @@
         Langue : <span>{{ $illustration->langue->langue }}</span><br>
     </div>
     <div class="container-sm   rounded   ">
-
+        <span></span>
 
         <div class="row  ">
             <div class="col  ps-0  ">
                 <ul class="list-group shadow ">
-                    <li class="list-group-item hover-composant ">An active item</li>
-                    <li class="list-group-item" > <span contenteditable="true"> A second item </span></li>
-                    <li class="list-group-item">A third item</li>
-                    <li class="list-group-item">A fourth item</li>
-                    <li class="list-group-item">And a fifth one</li>
+                    @foreach ($composants as $composant)
+                        <li class="list-group-item hover-composant li-composants "><span class="composant-to-edit"
+                                id="composant-{{ $composant->id }}" data-id="{{ $composant->id }}"
+                                contenteditable="false">{{ $composant->description }}</span><x-carbon-edit
+                                class="icon-style-btn icon-secondary edit" data-id="{{ $composant->id }}" /></li>
+                    @endforeach
+
                 </ul>
             </div>
 
@@ -41,8 +43,7 @@
 
     <div class="md-fab-wrapper">
 
-        <x-heroicon-s-check-circle class="icon-style-btn-Large icon-success " data-bs-toggle="modal"
-            data-bs-target="#exampleModal" />
+        <x-heroicon-s-check-circle class="icon-style-btn-Large icon-success  " id="post-edit-composant" data-url="{{route('USER-LOGGED-POST-EDIT-COMPOSANT-ILUSTRATION')}}" />
 
 
     </div>
@@ -78,186 +79,116 @@
             display: inline-block;
 
         }
+
+        .li-composants {
+            display: flex;
+            justify-content: space-between;
+        }
     </style>
 @endsection
 
 @section('scripts')
     <script>
-        var composant = [];
-
-
         document.addEventListener("DOMContentLoaded", function() {
 
-            var composant = [{
-                    "eventClientX": 667,
-                    "eventClientY": 339,
-                    "XX": 195,
-                    "YY": 152.76666259765625,
-                    "rect": {
-                        "x": 472,
-                        "y": 186.23333740234375,
-                        "width": 640,
-                        "height": 526.316650390625,
-                        "top": 186.23333740234375,
-                        "right": 1112,
-                        "bottom": 712.5499877929688,
-                        "left": 472
-                    },
-                    "description": "composanr 1"
-                },
-                {
-                    "eventClientX": 964,
-                    "eventClientY": 546,
-                    "XX": 492,
-                    "YY": 359.76666259765625,
-                    "rect": {
-                        "x": 472,
-                        "y": 186.23333740234375,
-                        "width": 640,
-                        "height": 526.316650390625,
-                        "top": 186.23333740234375,
-                        "right": 1112,
-                        "bottom": 712.5499877929688,
-                        "left": 472
-                    },
-                    "description": "composanr 1"
-                },
-                {
-                    "eventClientX": 654,
-                    "eventClientY": 472,
-                    "XX": 182,
-                    "YY": 285.76666259765625,
-                    "rect": {
-                        "x": 472,
-                        "y": 186.23333740234375,
-                        "width": 640,
-                        "height": 526.316650390625,
-                        "top": 186.23333740234375,
-                        "right": 1112,
-                        "bottom": 712.5499877929688,
-                        "left": 472
-                    },
-                    "description": "composanr 1"
-                },
-                {
-                    "eventClientX": 654,
-                    "eventClientY": 627,
-                    "XX": 182,
-                    "YY": 440.76666259765625,
-                    "rect": {
-                        "x": 472,
-                        "y": 186.23333740234375,
-                        "width": 640,
-                        "height": 526.316650390625,
-                        "top": 186.23333740234375,
-                        "right": 1112,
-                        "bottom": 712.5499877929688,
-                        "left": 472
-                    },
-                    "description": "composanr 1"
-                },
-                {
-                    "eventClientX": 528,
-                    "eventClientY": 277,
-                    "XX": 56,
-                    "YY": 90.76666259765625,
-                    "rect": {
-                        "x": 472,
-                        "y": 186.23333740234375,
-                        "width": 640,
-                        "height": 526.316650390625,
-                        "top": 186.23333740234375,
-                        "right": 1112,
-                        "bottom": 712.5499877929688,
-                        "left": 472
-                    },
-                    "description": "1 1"
-                }
-            ];
+            function changeDescriptionComposantById(id_composant, description) {
+                return composant.filter(function(obj) {
+                    if (obj.id == parseInt(id_composant)) {
+                        obj.description = description;
+                    }
+                    return true;
+                });
+            }
 
-            function showComposant() {
-                console.log(composant);
-                composant.forEach(element => {
-                    var rect = element.rect;
+            var composant = @json($composants);
 
-                    console.log(element);
-                    var YY = element.YY;
-                    var XX = element.XX;
-                    let line = document.getElementById("lines");
-                    let div = document.createElement("div");
-                    let description = document.createElement("div");
-                    let span = document.createElement("span");
+            showComposant(null, null, composant);
 
-                    if (element.eventClientX < screen.width / 2) {
+            var btn_edits = document.getElementsByClassName('edit');
 
-                        description.innerHTML = "description"
-                        description.classList.add("line")
-                        description.style.top = YY - 10;
-                        description.style.heigth = 1;
-                        description.style.width = 90;
-                        description.style.left = -140;
+            for (let index = 0; index < btn_edits.length; index++) {
+                btn_edits[index].addEventListener('click', function(e) {
 
-                        description.style.zIndex = 200;
+                    var composant_spans = document.getElementsByClassName('composant-to-edit');
 
-                        line.appendChild(description);
-
-                        div.innerHTML += "";
-                        div.classList.add("line")
-                        div.style.top = YY;
-                        div.style.heigth = 1;
-                        div.style.width = XX + 47;
-                        div.style.left = -50;
-                        div.style.border = "1px solid";
-                        div.style.zIndex = 200;
-                        line.appendChild(div);
-
-                        span.classList.add("dot")
-                        span.style.top = YY - 2;
-                        span.style.heigth = 1;
-                        span.style.left = XX - 3;
-                        span.style.zIndex = 200;
-                        span.style.position = "absolute";
-                        line.appendChild(span);
-
-                    } else {
-
-                        description.innerHTML = "description"
-                        description.classList.add("line")
-                        description.style.top = YY - 10;
-                        description.style.heigth = 1;
-                        description.style.left = XX + (-element.eventClientX + rect.right) + 57;
-                        description.style.zIndex = 200;
-
-                        line.appendChild(description);
-
-                        div.innerHTML += "";
-                        div.classList.add("line")
-                        div.style.top = YY;
-                        div.style.heigth = 1;
-                        div.style.width = 47 - (element.eventClientX - rect.right);
-                        div.style.left = XX;
-
-                        div.style.border = "1px solid";
-                        div.style.zIndex = 200;
-                        line.appendChild(div);
-
-                        span.classList.add("dot")
-                        span.style.top = YY - 2;
-                        span.style.heigth = 1;
-                        span.style.left = XX - 3;
-                        span.style.zIndex = 200;
-                        span.style.position = "absolute";
-                        line.appendChild(span);
-
+                    for (let index = 0; index < composant_spans.length; index++) {
+                        composant_spans[index].contentEditable = false;
                     }
 
+                    let id = this.dataset.id;
+                    let span = document.getElementById('composant-' + id);
+                    span.contentEditable = true;
+                    span.focus();
+                    span.addEventListener('input', function(e) {
+                        let description = document.getElementById('description-' + id);
+                        description.innerHTML = span.textContent;
+                        composant = changeDescriptionComposantById(id, span.textContent);
+                    })
                 });
-
 
             }
 
-            showComposant();
+            document.getElementById('post-edit-composant').addEventListener('click', function(e) {
 
+                e.preventDefault();
+
+
+                var formData = new FormData();
+                formData.append('composants', JSON.stringify(composant));
+                formData.append('id', "{{ $illustration->id }}");
+                var xhr = new XMLHttpRequest();
+                var url = this.dataset.url;
+                xhr.open('POST', url, true);
+                xhr.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
+
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4) {
+                        console.log(xhr.status);
+
+                        if (xhr.status == 200) {
+
+                            console.log(xhr.responseText);
+                            var response = JSON.parse(xhr.responseText);
+
+                            Swal.fire({
+                                title: "Action effectuée avec succès!",
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer: 1000
+                            }).then((result) => {
+                                if (result.dismiss === Swal.DismissReason.timer) {
+                                    window.location.href = "{{ route('USER-LOGGED-INDEX') }}"
+                                }
+                            });;
+
+
+
+                        } else {
+
+                            var response = JSON.parse(xhr.responseText);
+
+                            var string_error = '<b>Les données fournies ne sont pas valides </b><br>';
+
+                            for (var key in response) {
+                                if (response.hasOwnProperty(key)) {
+                                    string_error += '<br>' + response[key][0];
+                                }
+                            }
+
+                            console.log(response);
+                            Swal.fire({
+                                title: "Erreur!",
+                                html: string_error,
+                                icon: "error"
+                            });
+
+
+                        }
+                    }
+                };
+
+                xhr.send(formData);
+            });
 
         });
     </script>

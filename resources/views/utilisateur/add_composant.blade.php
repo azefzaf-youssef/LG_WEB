@@ -70,52 +70,57 @@
 
         document.addEventListener("DOMContentLoaded", function() {
 
+            function removeDeletedComposantById(id_composant) {
+                return composant.filter(function(obj) {
+                    return obj.id !== parseInt(id_composant);
+                });
+            }
+
+            function deleteComposant(id, old_lines, image, composant) {
+
+                composant = removeDeletedComposantById(id);
+                showComposant(old_lines, image, composant);
+                return composant;
+
+            }
+
+            function getXandY() {
+                myModal.show();
+                var rect = event.target.getBoundingClientRect();
+                var XX = event.clientX - rect.left;
+                var XX_R = event.clientX - rect.right;
+                var YY = event.clientY - rect.top;
+                let H = window.innerHeight;
+                let W = window.innerWidth;
+                let x = event.clientX;
+                let y = event.clientY;
+
+
+                let locations = {
+                    "eventClientX": event.clientX,
+                    "eventClientY": event.clientY,
+                    "XX": XX,
+                    "YY": YY,
+                    "rect": rect
+                }
+
+                composant.push(locations);
+
+            }
 
             var myModal = new Modal(document.getElementById('exampleModal'), {
                 keyboard: false
             });
 
             document.getElementById('images').addEventListener('click', function(e) {
-                function getXandY() {
-                    myModal.show();
-                    var rect = event.target.getBoundingClientRect();
-                    var XX = event.clientX - rect.left; //x position within the element.
-                    var XX_R = event.clientX - rect.right; //x position within the element.
-                    var YY = event.clientY - rect.top; //y position within the element.
-                    console.log("Left? : " + XX + " ; Top? : " + YY + ".");
-                    let H = window.innerHeight;
-                    let W = window.innerWidth;
-                    console.log(H, W);
-                    console.log(event);
-                    let x = event.clientX;
-                    let y = event.clientY;
-
-
-                    let locations = {
-                        "eventClientX": event.clientX,
-                        "eventClientY": event.clientY,
-                        "XX": XX,
-                        "YY": YY,
-                        "rect": rect
-                    }
-
-                    composant.push(locations);
-                    console.log(composant);
-
-                    console.log(locations);
-
-
-
-
-                }
                 getXandY();
             });
+
             document.getElementById('post-description').addEventListener('submit', function(e) {
 
                 e.preventDefault();
 
                 var description_text = document.getElementById('description').value;
-                console.log(description_text);
                 id_composant++;
                 composant[composant.length - 1].id = id_composant;
                 if (description_text.length == 0) {
@@ -127,158 +132,17 @@
                 }
 
 
+                let old_lines = document.getElementById("lines");
+                let image = document.getElementById("images");
+                composant = showComposant(old_lines, image, composant, true);
 
-                function removeDeletedComposantById(id_composant) {
-                    return composant.filter(function(obj) {
-                        return obj.id !== parseInt(id_composant);
-                    });
-                }
-
-                function deleteComposant(id) {
-
-                    console.log(id);
-                    composant = removeDeletedComposantById(id);
-                    console.log(composant);
-                    showComposant();
-
-                }
-
-                function generateBtnDelete(element, YY, XX = null, rect = null, right = false) {
-
-                    let btn_delete = document.createElement("div");
-
-                    btn_delete.innerHTML =
-                        `<x-carbon-close  class="icon-style-btn icon-danger delete-composant "  />`;
-                    btn_delete.classList.add("line")
-                    btn_delete.dataset.id = element.id;
-                    btn_delete.style.top = YY - 10;
-                    btn_delete.style.heigth = 1;
-                    if (right) {
-                        btn_delete.style.left = XX + (-element.eventClientX + rect.right) + 150;
-
-                    } else {
-                        btn_delete.style.left = -165;
-                    }
-                    btn_delete.style.zIndex = 200;
-                    btn_delete.addEventListener('click', function(e) {
-                        deleteComposant(this.dataset.id);
-                    })
-
-                    return btn_delete;
-
-                }
-
-                function generateDescription(element, YY, XX = null, rect = null, right = false) {
-                    let description = document.createElement("div");
-
-                    description.innerHTML = element.description;
-                    description.classList.add("line");
-                    description.style.top = YY - 10;
-                    description.style.heigth = 1;
-                    description.style.width = 90;
-                    if (right) {
-                        description.style.left = XX + (-element.eventClientX + rect.right) + 57;
-
-                    } else {
-                        description.style.left = -140;
-
-                    }
-                    description.style.zIndex = 200;
-
-                    return description;
-                }
-
-                function generateLine(YY, XX, element, rect = null, right = false) {
-
-                    let div = document.createElement("div");
-
-                    div.innerHTML += "";
-                    div.classList.add("line")
-                    div.style.top = YY;
-                    div.style.heigth = 1;
-                    if (right) {
-                        div.style.width = 47 - (element.eventClientX - rect.right);
-                        div.style.left = XX;
-                    } else {
-                        div.style.width = XX + 47;
-                        div.style.left = -50;
-                    }
-                    div.style.border = "1px solid";
-                    div.style.zIndex = 200;
-
-                    return div;
-                }
-
-                function generateDot(YY, XX) {
-
-                    let span = document.createElement("span");
-
-                    span.classList.add("dot")
-                    span.style.top = YY - 2;
-                    span.style.heigth = 1;
-                    span.style.left = XX - 3;
-                    span.style.zIndex = 200;
-                    span.style.position = "absolute";
-
-                    return span;
-
-                }
-
-                function showComposant() {
-                    let old_lines = document.getElementById("lines");
-                    let image = document.getElementById("images");
-                    old_lines.innerHTML = '';
-                    old_lines.appendChild(image);
-
-                    console.log(composant);
-                    composant.forEach(element => {
-                        var rect = element.rect;
-
-                        console.log(element);
-                        var YY = element.YY;
-                        var XX = element.XX;
-                        let line = document.getElementById("lines");
-                        let div = document.createElement("div");
-                        let description = document.createElement("div");
-                        let span = document.createElement("span");
-
-                        if (element.eventClientX < screen.width / 2) {
-
-                            btn_delete = generateBtnDelete(element, YY)
-                            line.appendChild(btn_delete);
-
-                            description = generateDescription(element, YY)
-                            line.appendChild(description);
-
-                            div = generateLine(YY, XX)
-                            line.appendChild(div);
-
-
-                            span = generateDot(YY, XX);
-                            line.appendChild(span);
-
-                        } else {
-
-                            btn_delete = generateBtnDelete(element, YY, XX, rect, true);
-                            line.appendChild(btn_delete);
-
-                            description = generateDescription(element, YY, XX, rect, true)
-                            line.appendChild(description);
-
-                            div = generateLine(YY, XX, element, rect, true);
-                            line.appendChild(div);
-
-                            span = generateDot(YY, XX);
-                            line.appendChild(span);
-
-                        }
-
+                deletes = document.getElementsByClassName('delete-composant');
+                for (let index = 0; index < deletes.length; index++) {
+                    deletes[index].addEventListener('click', function(e) {
+                        composant = deleteComposant(this.dataset.id, old_lines, image, composant);
                     });
 
-
                 }
-
-                showComposant();
 
                 myModal.hide();
 
@@ -309,14 +173,18 @@
                             var response = JSON.parse(xhr.responseText);
 
                             Swal.fire({
-                                title: "Good job!",
-                                text: "You clicked the button!",
-                                icon: "success"
-                            });
+                                title: "Action effectuée avec succès!",
+                                icon: "success",
+                                showConfirmButton: false,
+                                timer:1000
+                            }).then((result) => {
+                                /* Read more about handling dismissals below */
+                                if (result.dismiss === Swal.DismissReason.timer) {
+                                    window.location.href = "{{route('USER-LOGGED-INDEX')}}"
+                                }
+                            });;
 
-                            myModal.hide();
 
-                            window.location.reload();
 
                         } else {
 

@@ -3020,14 +3020,17 @@ function withinMaxClamp(min, value, max) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
+/* harmony import */ var _draw_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./draw-element */ "./resources/js/draw-element.js");
+/* harmony import */ var _draw_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_draw_element__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.esm.js");
 
 
 
-window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_1___default()); // Make Swal global
-window.Modal = bootstrap__WEBPACK_IMPORTED_MODULE_2__.Modal; // Make Modal global
+
+window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_2___default()); // Make Swal global
+window.Modal = bootstrap__WEBPACK_IMPORTED_MODULE_3__.Modal; // Make Modal global
 
 /***/ }),
 
@@ -3074,6 +3077,137 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
 //     enabledTransports: ['ws', 'wss'],
 // });
+
+/***/ }),
+
+/***/ "./resources/js/draw-element.js":
+/*!**************************************!*\
+  !*** ./resources/js/draw-element.js ***!
+  \**************************************/
+/***/ (() => {
+
+var old_lines;
+var image;
+var composant;
+var withDelete = false;
+function generateBtnDelete(element, YY) {
+  var XX = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  var rect = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+  var right = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+  var btn_delete = document.createElement("div");
+  btn_delete.innerHTML = "x";
+  btn_delete.classList.add("line");
+  btn_delete.classList.add("delete-composant");
+  btn_delete.dataset.id = element.id;
+  btn_delete.style.top = YY - 10;
+  btn_delete.style.heigth = 1;
+  btn_delete.style.color = "red";
+  btn_delete.style.cursor = "pointer";
+  if (right) {
+    btn_delete.style.left = XX + (-element.eventClientX + rect.right) + 150;
+  } else {
+    btn_delete.style.left = -165;
+  }
+  btn_delete.style.zIndex = 200;
+  return btn_delete;
+}
+function generateDescription(element, YY) {
+  var XX = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  var rect = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+  var right = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+  var description = document.createElement("div");
+  description.innerHTML = element.description;
+  description.dataset.id = element.id;
+  description.id = "description-" + element.id;
+  description.classList.add("line");
+  description.style.top = YY - 10;
+  description.style.heigth = 1;
+  description.style.width = 90;
+  if (right) {
+    description.style.left = XX + (-element.eventClientX + rect.right) + 57;
+  } else {
+    description.style.left = -140;
+  }
+  description.style.zIndex = 200;
+  return description;
+}
+function generateLine(YY, XX, element) {
+  var rect = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+  var right = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+  var div = document.createElement("div");
+  div.innerHTML += "";
+  div.classList.add("line");
+  div.style.top = YY;
+  div.style.heigth = 1;
+  if (right) {
+    div.style.width = 47 - (element.eventClientX - rect.right);
+    div.style.left = XX;
+  } else {
+    div.style.width = XX + 47;
+    div.style.left = -50;
+  }
+  div.style.border = "1px solid";
+  div.style.zIndex = 200;
+  return div;
+}
+function generateDot(YY, XX) {
+  var span = document.createElement("span");
+  span.classList.add("dot");
+  span.style.top = YY - 2;
+  span.style.heigth = 1;
+  span.style.left = XX - 3;
+  span.style.zIndex = 200;
+  span.style.position = "absolute";
+  return span;
+}
+function showComposant() {
+  var line = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : old_lines;
+  var img = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : image;
+  var composants = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : composant;
+  var withDelete = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : withDelete;
+  withDelete = withDelete;
+  composant = composants;
+  if (line) {
+    old_lines = line;
+    image = img;
+    old_lines.innerHTML = '';
+    old_lines.appendChild(image);
+  }
+  composant.forEach(function (element) {
+    var rect = element.rect;
+    var YY = element.YY;
+    var XX = element.XX;
+    var line = document.getElementById("lines");
+    var div = document.createElement("div");
+    var description = document.createElement("div");
+    var span = document.createElement("span");
+    if (element.eventClientX < screen.width / 2) {
+      if (withDelete) {
+        btn_delete = generateBtnDelete(element, YY);
+        line.appendChild(btn_delete);
+      }
+      description = generateDescription(element, YY);
+      line.appendChild(description);
+      div = generateLine(YY, XX);
+      line.appendChild(div);
+      span = generateDot(YY, XX);
+      line.appendChild(span);
+    } else {
+      if (withDelete) {
+        btn_delete = generateBtnDelete(element, YY, XX, rect, true);
+        line.appendChild(btn_delete);
+      }
+      description = generateDescription(element, YY, XX, rect, true);
+      line.appendChild(description);
+      div = generateLine(YY, XX, element, rect, true);
+      line.appendChild(div);
+      span = generateDot(YY, XX);
+      line.appendChild(span);
+    }
+  });
+  return composant;
+}
+window.showComposant = showComposant;
 
 /***/ }),
 
