@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ajouter un utilisateur</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Ajouter illustration</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -10,36 +10,48 @@
                 <div class="col-xxl">
 
                     <div class="card-body">
-                        <form action="{{ route('GESTION-UTILISATEUR-POST') }}" method="POST" enctype="multipart/form-data"
-                            id="post-utilisateur">
+                        <form action="{{ route('USER-LOGGED-ADD-POST') }}" method="POST" enctype="multipart/form-data"
+                            id="post-illutration">
                             @csrf
                             <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label" for="basic-default-name">Nom</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="name" id="basic-default-name"
-                                        placeholder="Nom" />
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label" for="basic-default-name">Email</label>
-                                <div class="col-sm-9">
-                                    <input type="email" class="form-control" name="email" id="basic-default-name"
-                                        placeholder="Email" />
+                                <label class="col-sm-2 col-form-label" for="basic-default-name">Titre</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" name="titre" id="basic-default-name"
+                                        placeholder="Titre" />
                                 </div>
                             </div>
 
                             <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label" for="basic-default-name">Mot de passe</label>
-                                <div class="col-sm-9">
-                                    <input type="password" class="form-control" name="password" id="basic-default-name"
-                                        placeholder="Mot de passe" />
+                                <label class="col-sm-2 col-form-label" for="basic-default-phone">Domaine</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" name="domaine" id="exampleFormControlSelect1">
+                                        @foreach ($domaines as $domaine)
+                                            <option value="{{ $domaine->id }}">{{ $domaine->domaine }}</option>
+                                        @endforeach
+
+                                    </select>
                                 </div>
                             </div>
+
                             <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label" for="basic-default-name">Confirmation mot de passe</label>
-                                <div class="col-sm-9">
-                                    <input type="password" class="form-control" name="password_conf" id="basic-default-name"
-                                        placeholder="Confirmation mot de passe" />
+                                <label class="col-sm-2 col-form-label" for="basic-default-phone">Langue</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control" name="langue" id="exampleFormControlSelect1">
+                                        @foreach ($langues as $langue)
+                                            <option value="{{ $langue->id }}">{{ $langue->langue }}</option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+
+                                <label class="col-sm-2 col-form-label" for="illustration">Illustration</label>
+
+                                <div class="col-sm-10">
+                                    <input type="file" class="form-control-file" name="illustration"
+                                        id="illustration">
                                 </div>
                             </div>
 
@@ -70,7 +82,7 @@
         });
 
 
-        document.getElementById('post-utilisateur').addEventListener('submit', function(e) {
+        document.getElementById('post-illutration').addEventListener('submit', function(e) {
 
             e.preventDefault();
 

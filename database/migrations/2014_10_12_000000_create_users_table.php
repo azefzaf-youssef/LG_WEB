@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\User;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -16,10 +17,19 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->tinyInteger('is_admin')->default(0);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
+
+        $admin = new User();
+        $admin->name = "administrateur";
+        $admin->email = "administrateur@univ-roune.com";
+        $admin->password = Hash::make("123456");
+        $admin->is_admin = true;
+        $admin->save();
+
     }
 
     /**

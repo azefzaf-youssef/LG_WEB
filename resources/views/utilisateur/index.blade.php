@@ -1,65 +1,54 @@
 @extends('layout.master')
 @section('content')
     <div class="container header-block p-2 mb-3  rounded text-center shadow ">
-        <h5>Mes illustrations </h5>
+        <h5>Liste des utilisateurs </h5>
     </div>
     <div class="container bg-white p-5 rounded shadow ">
 
-        @if ($illustrations->count())
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-                @foreach ($illustrations as $illustration)
-                    <div class="col-lg-4">
-                        <div class="card mt-2 ">
-                            <a href="{{ route('USER-LOGGED-AFFICHER-ILUSTRATION', $illustration->id) }}"
-                                class="text-decoration-none">
-                                <img src="{{ asset($illustration->path_illustration) }}" class="card-img-top curor-pointer"
-                                    alt="...">
-                            </a>
-                            <div class="card-body">
-                                <a href="{{ route('USER-LOGGED-AFFICHER-ILUSTRATION', $illustration->id) }}"
-                                    class="text-decoration-none">
-                                    <h5 class="card-title curor-pointer">{{ $illustration->titre }}</h5>
-                                </a>
-                                <div class="card-text" style="float: right">
-                                    @if (count($illustration->getComposantLangueDefault()) == 0)
-                                        <a href="{{ route('USER-LOGGED-ADD-COMPOSANT-ILUSTRATION', $illustration->id) }}"><x-iconpark-targettwo
-                                                class="icon-style-btn icon-warning" /></a>
-                                    @endif
+        <div class="d-flex justify-content-md-between">
 
-                                    <a href="{{ route('USER-LOGGED-EDIT-COMPOSANT-ILUSTRATION', $illustration->id) }}"><x-carbon-edit
-                                            class="icon-style-btn icon-secondary" /></a>
-                                    {{-- <x-pepicon-loop class="icon-style-btn icon-success" /> --}}
-                                    <x-carbon-translate class="icon-style-btn icon-info" />
-                                    <x-carbon-close
-                                        data-url="{{ route('USER-LOGGED-DELETE-ILUSTRATION', $illustration->id) }}"
-                                        class="icon-style-btn icon-danger delete-illustration" />
+            <h4 class="pb-4">Liste des utilisateurs</h4>
 
-                                </div>
+        </div>
 
-                            </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col" class="w-50">Nom</th>
+                    <th scope="col" class="w-50">Email</th>
+                    <th scope="col">Action(s)</th>
+                </tr>
+            </thead>
+            <tbody>
 
-                        </div>
-                    </div>
+                @foreach ($users as $user)
+                    <tr>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>
+                            <x-gmdi-edit class="icon-style-btn icon-success edit-utilisateur"
+                                data-url="{{ route('GESTION-UTILISATEUR-EDIT', $user->id) }}" data-bs-toggle="modal"
+                                data-bs-target="#modal" />
+                            <x-carbon-close data-url="{{ route('GESTION-UTILISATEUR-DELETE', $user->id) }}"
+                                class="icon-style-btn icon-danger delete-utilisateur" />
+                        </td>
+                    </tr>
                 @endforeach
 
 
-            </div>
+            </tbody>
+        </table>
 
-            {!! $illustrations->links() !!}
-        @else
-            <div class="text-center">
-                Aucune donnée disponible
-            </div>
-        @endif
+
+        {!! $users->links() !!}
 
 
 
+        <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" id="modal-content">
 
-        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    ...
+
                 </div>
             </div>
         </div>
@@ -76,6 +65,8 @@
     </div>
 
 
+
+
     @include('utilisateur.ajouter');
 @endsection
 
@@ -83,11 +74,83 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
 
-            var illustrations = document.getElementsByClassName('delete-illustration')
-            console.log(illustrations);
+            function submitForm() {
 
-            for (let illustration of illustrations) {
-                illustration.addEventListener('click', function(e) {
+                document.getElementById('post-edit-utilisateur').addEventListener('submit', function(e) {
+
+                    console.log("test");
+                    e.preventDefault();
+
+                    var formData = new FormData(this);
+                    var xhr = new XMLHttpRequest();
+                    var url = this.action;
+
+                    xhr.open('POST', url, true);
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == 4) {
+                            console.log(xhr.status);
+
+                            if (xhr.status == 200) {
+
+                                console.log(xhr.responseText);
+                                var response = JSON.parse(xhr.responseText);
+
+                                Swal.fire({
+                                    title: "Action effectuée avec succès!",
+                                    icon: "success",
+                                    showConfirmButton: false,
+                                    timer:1000
+                            }).then((result) => {
+                                /* Read more about handling dismissals below */
+                                myModal.hide();
+                                if (result.dismiss === Swal.DismissReason.timer) {
+                                window.location.reload();
+
+                                }
+                            });
+
+
+
+                            } else {
+
+                                var response = JSON.parse(xhr.responseText);
+
+                                var string_error =
+                                    '<b>Les données fournies ne sont pas valides </b><br>';
+
+                                for (var key in response) {
+                                    if (response.hasOwnProperty(key)) {
+                                        string_error += '<br>' + response[key][0];
+                                    }
+                                }
+
+                                console.log(response);
+                                Swal.fire({
+                                    title: "Erreur!",
+                                    html: string_error,
+                                    icon: "error"
+                                });
+
+
+                            }
+                        }
+                    };
+
+                    xhr.send(formData);
+                });
+            }
+
+
+            var myModal = new Modal(document.getElementById('modal'), {
+                keyboard: false
+            });
+
+
+
+            var utilisateurs = document.getElementsByClassName('delete-utilisateur')
+
+            for (let utilisateur of utilisateurs) {
+                utilisateur.addEventListener('click', function(e) {
 
                     Swal.fire({
                         title: "Êtes-vous sûr?",
@@ -101,12 +164,10 @@
 
                         if (result.value) {
 
-                            console.log(this.dataset.url);
 
                             var url = this.dataset.url;
 
 
-                            console.log(url);
                             var xhr = new XMLHttpRequest();
 
                             // Configure it: DELETE request for a specific URL
@@ -158,6 +219,62 @@
                         }
 
                     })
+                });
+            }
+
+
+            var edits = document.getElementsByClassName('edit-utilisateur')
+
+            for (let edit of edits) {
+                edit.addEventListener('click', function(e) {
+
+
+                    console.log(this.dataset.url);
+
+                    var url = this.dataset.url;
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', url, true);
+                    xhr.setRequestHeader('X-CSRF-TOKEN', '{{ csrf_token() }}');
+
+                    xhr.onload = function() {
+                        if (xhr.readyState == 4) {
+                            console.log(xhr.status);
+
+                            if (xhr.status == 200) {
+
+                                document.getElementById('modal-content').innerHTML = xhr.responseText;
+                                submitForm();
+                                myModal.show();
+
+
+
+                            } else {
+
+                                var response = JSON.parse(xhr.responseText);
+
+                                var string_error =
+                                    '<b>Les données fournies ne sont pas valides </b><br>';
+
+                                for (var key in response) {
+                                    if (response.hasOwnProperty(key)) {
+                                        string_error += '<br>' + response[key][0];
+                                    }
+                                }
+
+                                Swal.fire({
+                                    title: "Erreur!",
+                                    html: string_error,
+                                    icon: "error"
+                                });
+
+
+                            }
+                        }
+                    };
+
+                    // Send the request
+                    xhr.send();
+
                 });
             }
 

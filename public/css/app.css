@@ -11994,8 +11994,12 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.rounded {
+  border-radius: 0px !important;
+}
+
 .header-block {
-  background-color: #4b4660;
+  background-color: #555458;
   color: var(--tmp-color-white);
 }
 
@@ -12009,6 +12013,14 @@ textarea.form-control-lg {
 
 .white-color {
   color: var(--tmp-color-white) !important;
+}
+
+.black-color {
+  color: var(--dark) !important;
+}
+
+.black-bg {
+  background-color: var(--dark) !important;
 }
 
 .white-bg {
@@ -12148,6 +12160,13 @@ textarea.form-control-lg {
 .md-fab-dark {
   background: var(--dark);
   color: var(--white);
+}
+
+.dropdown-item:active {
+  color: var(--bs-dropdown-link-active-color) !important;
+  text-decoration: none;
+  background-color: var(--bs-dropdown-link-active-bg);
+  color: white !important;
 }
 
 .icon-style {

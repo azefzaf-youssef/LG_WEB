@@ -1,16 +1,24 @@
 @extends('layout.master')
 
 @section('content')
-    <div class="container  p-3 header-block  rounded mb-4  shadow">
+    <div class="container  p-2 header-block  rounded mb-2  shadow">
         <h4> Titre : <i>{{ $illustration->titre }} </i></h4>
         Langue : <span>{{ $illustration->langue->langue }}</span><br>
     </div>
-    <div class="container-sm   rounded   ">
-        <span></span>
 
-        <div class="row  ">
-            <div class="col  ps-0  ">
-                <ul class="list-group shadow ">
+    <div class="container  p-2 header-block  rounded mb-0  shadow">
+        <span>
+            Saisir la traduction de composant en <b> {{$langue->langue}}  </b> :
+        </span>
+    </div>
+
+    <div class="container-sm   rounded   ">
+
+
+
+        <div class="row bg-white ">
+            <div class="col  p-0  ">
+                <ul class="list-group rounded-0 ">
                     @foreach ($composants as $composant)
                         <li class="list-group-item hover-composant li-composants "><span class="composant-to-edit"
                                 id="composant-{{ $composant->id }}" data-id="{{ $composant->id }}"
@@ -22,12 +30,10 @@
             </div>
 
 
-            {{-- <div class="col  bg-white  shadow  ">
-
-            </div> --}}
 
 
-            <div class=" col-9  bg-white shadow  ">
+
+            <div class=" col-9  bg-white border  ">
                 <div class="card card-img " style="left: 16% ;width: fit-content;">
                     <div id="lines" class="container-fluide">
                         <img id="images" onclick="getXandY()" src="{{ asset($illustration->path_illustration) }}"
@@ -36,20 +42,19 @@
                 </div>
             </div>
 
-            {{-- <div class="col bg-white shadow"></div> --}}
 
         </div>
     </div>
 
     <div class="md-fab-wrapper">
 
-        <x-heroicon-s-check-circle class="icon-style-btn-Large icon-success  " id="post-edit-composant" data-url="{{route('USER-LOGGED-POST-EDIT-COMPOSANT-ILUSTRATION')}}" />
+        <x-heroicon-s-check-circle class="icon-style-btn-Large icon-success  " id="post-edit-composant" data-url="{{route('USER-LOGGED-POST-ADD-TRADUCTION-COMPOSANT-ILUSTRATION')}}" />
 
 
     </div>
 
     </div>
-    @include('utilisateur.ajouter_composant_pop_up');
+    @include('illustration.ajouter_composant_pop_up');
 @endsection
 
 @section('styles')
@@ -136,6 +141,7 @@
                 var formData = new FormData();
                 formData.append('composants', JSON.stringify(composant));
                 formData.append('id', "{{ $illustration->id }}");
+                formData.append('id_langue', "{{ $langue->id }}");
                 var xhr = new XMLHttpRequest();
                 var url = this.dataset.url;
                 xhr.open('POST', url, true);

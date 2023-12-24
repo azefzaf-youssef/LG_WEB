@@ -1,15 +1,13 @@
 @extends('layout.master')
 @section('content')
     <div class="container header-block p-2 mb-3  rounded text-center shadow ">
-        <h5> Illustrations </h5>
+        <h5>Mes illustrations </h5>
     </div>
     <div class="container bg-white p-5 rounded shadow ">
 
         @if ($illustrations->count())
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 @foreach ($illustrations as $illustration)
-                @if (count($illustration->getComposantLangueDefault()))
-
                     <div class="col-lg-3">
                         <div class="card mt-2 ">
                             <a href="{{ route('USER-LOGGED-AFFICHER-ILUSTRATION', $illustration->titre) }}"
@@ -20,26 +18,31 @@
                             <div class="card-body">
                                 <a href="{{ route('USER-LOGGED-AFFICHER-ILUSTRATION', $illustration->titre) }}"
                                     class="text-decoration-none">
-                                    <h6 class="card-title curor-pointer">{{ $illustration->titre }}</h6>
+                                    <h5 class="card-title curor-pointer">{{ $illustration->titre }}</h5>
                                 </a>
                                 <div class="card-text" style="float: right">
+                                    @if (count($illustration->getComposantLangueDefault()) == 0)
+                                        <a href="{{ route('USER-LOGGED-ADD-COMPOSANT-ILUSTRATION', $illustration->titre) }}"><x-iconpark-targettwo
+                                                class="icon-style-btn icon-warning" /></a>
+                                    @endif
 
-                                    @if (Auth::user())
-                                    @if (Auth::user()->is_admin)
-                                        <x-carbon-close
-                                            data-url="{{ route('USER-LOGGED-DELETE-ILUSTRATION', $illustration->titre) }}"
-                                            class="icon-style-btn icon-danger delete-illustration" />
+                                    @if (count($illustration->getComposantLangueDefault()) != 0)
+
+                                    <a href="{{ route('USER-LOGGED-EDIT-COMPOSANT-ILUSTRATION', $illustration->titre) }}"><x-carbon-edit
+                                            class="icon-style-btn icon-secondary" /></a>
                                     @endif
-                                    @endif
+
+                                    {{-- <x-pepicon-loop class="icon-style-btn icon-success" /> --}}
+                                    <x-carbon-close
+                                        data-url="{{ route('USER-LOGGED-DELETE-ILUSTRATION', $illustration->titre) }}"
+                                        class="icon-style-btn icon-danger delete-illustration" />
+
                                 </div>
 
                             </div>
 
                         </div>
-
                     </div>
-                @endif
-
                 @endforeach
 
 
@@ -68,9 +71,15 @@
 
 
     </div>
+    <div class="md-fab-wrapper">
+
+        <x-carbon-add-filled class="icon-style-btn-Large icon-success  " data-bs-toggle="modal"
+            data-bs-target="#exampleModal" />
+
+    </div>
 
 
-
+    @include('illustration.ajouter');
 @endsection
 
 @section('scripts')

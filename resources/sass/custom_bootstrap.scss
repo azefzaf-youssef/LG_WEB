@@ -25,11 +25,17 @@ $btn-border-radius:3px;
 // Import Bootstrap source files
 @import 'bootstrap/scss/bootstrap';
 
+
+.rounded{
+    border-radius: 0px !important;
+}
+
 .header-block {
 
-    background-color: #4b4660;
+    background-color: #555458;
     color: var(--tmp-color-white);
 }
+
 .tmp-color-bleu-marine-color{
     color: var(--tmp-color-bleu-marine) !important;
 
@@ -41,6 +47,16 @@ $btn-border-radius:3px;
 .white-color {
 
     color:var(--tmp-color-white) !important;
+
+}
+.black-color {
+
+    color:var(--dark) !important;
+
+}
+.black-bg {
+
+    background-color:var(--dark) !important;
 
 }
 .white-bg {
@@ -214,3 +230,10 @@ $btn-border-radius:3px;
   color: var(--white);
 
 }
+
+.dropdown-item:active {
+    color: var(--bs-dropdown-link-active-color) !important;
+    text-decoration: none;
+    background-color: var(--bs-dropdown-link-active-bg);
+    color: white !important;
+  }

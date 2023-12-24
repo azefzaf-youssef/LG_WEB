@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Database\Schema\Blueprint;
@@ -25,6 +26,7 @@ Artisan::command('BDD', function () {
     Schema::dropIfExists('illustration');
     Schema::dropIfExists('Langue');
     Schema::dropIfExists('traduction');
+    Schema::dropIfExists('domaines');
     Schema::enableForeignKeyConstraints();
 
 
@@ -32,6 +34,7 @@ Artisan::command('BDD', function () {
 
         $table->increments('id');
         $table->unsignedInteger('id_langue');
+        $table->unsignedInteger('id_domaine');
         $table->unsignedInteger('id_user');
         $table->string('titre')->unique();
         $table->string('path_illustration');
@@ -101,6 +104,38 @@ Artisan::command('BDD', function () {
         $table->softDeletes();
 
     });
+
+    Schema::create('domaines', function (Blueprint $table) {
+
+        $table->increments('id');
+        $table->longText('domaine');
+        $table->timestamps();
+        $table->softDeletes();
+
+    });
+
+
+    DB::table('domaines')->insert([
+        'domaine' => 'Arts',
+    ]);
+
+    DB::table('domaines')->insert([
+        'domaine' => 'Sciences',
+    ]);
+
+    DB::table('domaines')->insert([
+        'domaine' => 'Économie',
+    ]);
+
+    DB::table('domaines')->insert([
+        'domaine' => 'Sciences humaines',
+    ]);
+
+    DB::table('domaines')->insert([
+        'domaine' => 'Biologie',
+    ]);
+
+
 
 });
 

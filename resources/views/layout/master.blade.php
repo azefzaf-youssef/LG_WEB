@@ -36,7 +36,7 @@
 body {
     background-color: #e6e6e6;
     color: #170657;
-    font-family:'arial';
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
 }
 
 .tmp-color-white {

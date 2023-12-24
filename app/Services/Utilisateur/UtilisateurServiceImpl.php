@@ -3,31 +3,30 @@
 namespace App\Services\Utilisateur;
 
 use Auth;
+use App\Models\User;
 use App\Models\Traduction;
 use App\Models\Illustration;
+use Illuminate\Support\Facades\Hash;
 
 class UtilisateurServiceImpl implements UtilisateurService
 {
 
-    public function addPostIllustration($request)
+    public function addOrEditPostUtilisateur($request)
     {
 
         try {
 
-            $illustration = new Illustration();
-            $path = 'public/illustrattion/' . date('y-m-d');
-            $rs = \Storage::putFile($path, $request->file('illustration'));
-            $rs = str_replace("public", "storage", $rs);
-            $illustration->path_illustration = $rs;
-            $illustration->titre = $request->get('titre');
-            $illustration->id_langue = $request->get('langue');
-            $illustration->id_user = Auth::user()->id;
-
-            $illustration->save();
+            $user  = ($request->get('id')) ? User::find($request->get('id')) : new User() ;
+            $user->name = $request->get('name');
+            $user->email = $request->get('email');
+            $user->password = Hash::make($request->get('password'));
+            $user->save();
 
             return response()->json(['message'], 200);
 
         } catch (\Throwable $th) {
+
+            dd($th);
 
             return response()->json(['error' => $th], 400);
 
@@ -35,11 +34,11 @@ class UtilisateurServiceImpl implements UtilisateurService
 
     }
 
-    public function deleteIllustration($id)
+    public function deleteUtilisateur($id)
     {
 
-        $illustration = Illustration::find($id);
-        if ($illustration->delete()) {
+        $user = User::find($id);
+        if ($user->delete()) {
             return true;
 
         }
@@ -47,67 +46,17 @@ class UtilisateurServiceImpl implements UtilisateurService
 
     }
 
-    public function getIllustration($id)
+
+    public function getListUtilisateursIllustration($pagination)
     {
-        return Illustration::find($id);
-    }
-
-    public function getListPaginationIllustrationByUser($id, $pagination)
-    {
-        return Illustration::where('id_user', $id)->paginate(6);
-    }
-
-    public function getListPaginationIllustration($pagination)
-    {
-        return Illustration::paginate(6);
-    }
-
-    public function addComposants($request)
-    {
-
-        try {
-
-            $traduction = new Traduction();
-            $illustration = $this->getIllustration($request->get('id'));
-            $traduction->id_user = Auth::user()->id;
-            $traduction->id_langue = $illustration->id_langue;
-            $traduction->composants_json = $request->get('composants');
-            $traduction->id_illustration = $request->get('id');
-            $traduction->default = true;
-            $traduction->save();
-
-            return response()->json(['message'], 200);
-
-        } catch (\Throwable $th) {
-
-            return response()->json(['error' => $th], 400);
-
-        }
+        return User::where('is_admin',false)->paginate($pagination);
     }
 
 
-
-    public function editComposants($request)
+    public function getUtilisateur($id)
     {
-
-        try {
-
-            $traduction = Traduction::where('id_illustration',$request->get('id'))->where('default',true)->first();
-            $illustration = $this->getIllustration($request->get('id'));
-            $traduction->id_user = Auth::user()->id;
-            $traduction->id_langue = $illustration->id_langue;
-            $traduction->composants_json = $request->get('composants');
-            $traduction->id_illustration = $request->get('id');
-            $traduction->default = true;
-            $traduction->save();
-
-            return response()->json(['message'], 200);
-
-        } catch (\Throwable $th) {
-
-            return response()->json(['error' => $th], 400);
-
-        }
+        return User::find($id);
     }
+
 
 }

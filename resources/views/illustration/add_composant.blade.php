@@ -1,12 +1,11 @@
 @extends('layout.master')
 
 @section('content')
-    <div class="container  p-3 header-block  rounded mb-4  shadow">
-        <h4> Titre : <i>{{ $illustration->titre }} </i></h4>
-        Langue : <span>{{ $illustration->langue->langue }}</span><br>
-    </div>
+
+    @include('illustration.header')
+
     <div class="container bg-white p-5 rounded shadow ">
-        <div class="title-2 pb-4">Termenoligie</div>
+        <h4 class=" pb-4">Termenoligie</h4>
 
 
         <div class="row ">
@@ -31,7 +30,7 @@
     </div>
 
     </div>
-    @include('utilisateur.ajouter_composant_pop_up');
+    @include('illustration.ajouter_composant_pop_up');
 @endsection
 
 @section('styles')
@@ -44,6 +43,7 @@
 
         #images {
             width: 40rem;
+            cursor: crosshair;
 
         }
 
@@ -157,7 +157,7 @@
 
                 var formData = new FormData();
                 formData.append('composants', JSON.stringify(composant));
-                formData.append('id', "{{ $illustration->id }}");
+                formData.append('titre', "{{ $illustration->titre }}");
                 var xhr = new XMLHttpRequest();
                 var url = this.dataset.url;
                 xhr.open('POST', url, true);

@@ -5,17 +5,13 @@ namespace App\Services\Utilisateur;
 interface UtilisateurService
 {
 
-    public function addPostIllustration($request);
+    public function addOrEditPostUtilisateur($request);
 
-    public function deleteIllustration($id);
+    public function deleteUtilisateur($id);
 
-    public function getIllustration($id);
+    public function getListUtilisateursIllustration($pagination);
 
-    public function getListPaginationIllustrationByUser($id,$pagination);
-
-    public function getListPaginationIllustration($pagination);
-
-    public function addComposants($request);
+    public function getUtilisateur($id);
 
 
 }
