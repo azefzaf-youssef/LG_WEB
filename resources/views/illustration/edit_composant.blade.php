@@ -1,13 +1,18 @@
 @extends('layout.master')
 
 @section('content')
-@include('illustration.header')
+    @include('illustration.header')
 
+    <div class="container  p-2 header-block  rounded mb-0  shadow">
+        <span>
+            Modification des composants :
+        </span>
+    </div>
     <div class="container-sm   rounded   ">
         <span></span>
 
         <div class="row  bg-white ">
-            <div class="col  p-0  ">
+            <div class="col  p-2  ">
                 <ul class="list-group  ">
                     @foreach ($composants as $composant)
                         <li class="list-group-item hover-composant li-composants rounded-0 "><span class="composant-to-edit"
@@ -21,7 +26,7 @@
 
 
 
-            <div class=" col-9  bg-white border   ">
+            <div class=" col-9  bg-white border p-2   ">
                 <div class="card card-img " style="left: 16% ;width: fit-content;">
                     <div id="lines" class="container-fluide">
                         <img id="images" onclick="getXandY()" src="{{ asset($illustration->path_illustration) }}"
@@ -36,7 +41,8 @@
 
     <div class="md-fab-wrapper">
 
-        <x-heroicon-s-check-circle class="icon-style-btn-Large icon-success  " id="post-edit-composant" data-url="{{route('USER-LOGGED-POST-EDIT-COMPOSANT-ILUSTRATION')}}" />
+        <x-heroicon-s-check-circle class="icon-style-btn-Large icon-success  " id="post-edit-composant"
+            data-url="{{ route('USER-LOGGED-POST-EDIT-COMPOSANT-ILUSTRATION') }}"  />
 
 
     </div>
@@ -83,6 +89,8 @@
 @section('scripts')
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+
+
 
             function changeDescriptionComposantById(id_composant, description) {
                 return composant.filter(function(obj) {

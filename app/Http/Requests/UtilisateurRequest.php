@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
 
@@ -33,7 +34,7 @@ class UtilisateurRequest extends FormRequest
         return [
 
             'name' => 'required',
-            'email' => 'required',
+            'email' => ["required" ,"email",Rule::unique('users')->ignore($this->id, 'id')],
             'password' => "{$required}|min:8|required_with:password_conf|same:password_conf",
             'password_conf' => "{$required}"
 

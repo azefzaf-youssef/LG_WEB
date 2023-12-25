@@ -34,9 +34,13 @@
                                             class="icon-style-btn icon-success" /></a>
                                 @endif
                             @endif
+                            @if (Auth::user())
+                                @if (Auth::user()->is_admin || Auth::user()->id == $traduction->id_user)
                             <x-carbon-close
                                 data-url="{{ route('USER-LOGGED-DELETE-ILUSTRATION-TRADUCTION', $traduction->id) }}"
                                 class="icon-style-btn icon-danger delete-traduction" />
+                                @endif
+                            @endif
                         </td>
                     </tr>
                 @endforeach

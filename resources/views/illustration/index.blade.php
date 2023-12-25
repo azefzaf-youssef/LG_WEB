@@ -18,7 +18,7 @@
                             <div class="card-body">
                                 <a href="{{ route('USER-LOGGED-AFFICHER-ILUSTRATION', $illustration->titre) }}"
                                     class="text-decoration-none">
-                                    <h5 class="card-title curor-pointer">{{ $illustration->titre }}</h5>
+                                    <h6 class="card-title curor-pointer">{{ $illustration->titre }}</h6>
                                 </a>
                                 <div class="card-text" style="float: right">
                                     @if (count($illustration->getComposantLangueDefault()) == 0)

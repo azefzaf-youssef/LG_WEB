@@ -13,7 +13,6 @@
 
                 <div class="card-body ">
 
-                    {{--<h3 class="card-title pb-4">Inscription</h5> --}}
 
                     <form method="POST" action="{{ route('login') }}">
                         @csrf

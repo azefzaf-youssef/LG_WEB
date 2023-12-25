@@ -2,9 +2,9 @@
 
 namespace App\Services\Illustration;
 
-use Auth;
-use App\Models\Traduction;
 use App\Models\Illustration;
+use App\Models\Traduction;
+use Auth;
 
 class IllustrationServiceImpl implements IllustrationService
 {
@@ -40,6 +40,7 @@ class IllustrationServiceImpl implements IllustrationService
     {
 
         $illustration = $this->getIllustration($titre);
+        Traduction::where('id_illustration', $illustration->id)->delete();
         if ($illustration->delete()) {
             return true;
 
@@ -62,7 +63,7 @@ class IllustrationServiceImpl implements IllustrationService
 
     public function getIllustration($titre)
     {
-        return Illustration::where('titre',$titre)->first();
+        return Illustration::where('titre', $titre)->first();
     }
 
     public function getListPaginationIllustrationByUser($id, $pagination)
@@ -72,7 +73,27 @@ class IllustrationServiceImpl implements IllustrationService
 
     public function getListPaginationIllustration($pagination)
     {
-        return Illustration::paginate($pagination);
+        if (Auth::user()) {
+
+            if (Auth::user()->is_admin) {
+
+                return Illustration::paginate($pagination);
+
+            } else {
+
+                $ids_illustration = array_unique(Traduction::get()->pluck('id_illustration')->toArray());
+                return Illustration::whereIn('id', $ids_illustration)->paginate($pagination);
+
+            }
+
+        } else {
+
+            $ids_illustration = array_unique(Traduction::get()->pluck('id_illustration')->toArray());
+
+            return Illustration::whereIn('id', $ids_illustration)->paginate($pagination);
+
+        }
+
     }
 
     public function addComposants($request)
@@ -98,15 +119,13 @@ class IllustrationServiceImpl implements IllustrationService
         }
     }
 
-
-
     public function editComposants($request)
     {
 
         try {
             $illustration = $this->getIllustration($request->get('titre'));
 
-            $traduction = Traduction::where('id_illustration',$illustration->id)->where('default',true)->first();
+            $traduction = Traduction::where('id_illustration', $illustration->id)->where('default', true)->first();
             $traduction->id_user = Auth::user()->id;
             $traduction->id_langue = $illustration->id_langue;
             $traduction->composants_json = $request->get('composants');
@@ -124,7 +143,6 @@ class IllustrationServiceImpl implements IllustrationService
 
         }
     }
-
 
     public function addTraductionComposants($request)
     {
@@ -153,7 +171,7 @@ class IllustrationServiceImpl implements IllustrationService
     {
         try {
 
-            $traduction =  Traduction::where('id_langue',$request->get('id_langue'))->where('id_illustration',$request->get('id'))->first();
+            $traduction = Traduction::where('id_langue', $request->get('id_langue'))->where('id_illustration', $request->get('id'))->first();
             $traduction->composants_json = $request->get('composants');
             $traduction->save();
 

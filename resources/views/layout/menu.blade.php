@@ -1,8 +1,8 @@
 
-<nav class="navbar shadow navbar-expand-md  black-bg white-color ">
+<nav class="navbar shadow navbar-expand-md  black-bg white-color " >
     <div class="container">
         <a class="navbar-brand" href="{{ route('HOME') }}">
-            LGW
+            Terminologio
         </a>
 
 

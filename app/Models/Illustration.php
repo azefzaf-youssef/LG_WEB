@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\Langue;
 use App\Models\Domaine;
 use Illuminate\Database\Eloquent\Model;
@@ -20,6 +21,11 @@ class Illustration extends Model
     public function domaine()
     {
         return $this->belongsTo(Domaine::class, 'id_domaine');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
     }
 
     public function getComposantLangueDefaultJson()

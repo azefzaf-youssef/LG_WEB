@@ -16,7 +16,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label" for="basic-default-name">Titre</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="titre" id="basic-default-name"
+                                    <input type="text" class="form-control" name="titre" id="titre"
                                         placeholder="Titre" />
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                                 <label class="col-sm-2 col-form-label" for="illustration">Illustration</label>
 
                                 <div class="col-sm-10">
-                                    <input type="file" class="form-control-file" name="illustration"
+                                    <input type="file" class="form-control-file" max="2"  name="illustration"
                                         id="illustration">
                                 </div>
                             </div>
@@ -107,6 +107,10 @@
                         });
 
                         myModal.hide();
+
+                        document.getElementById('titre').value ='';
+                        document.getElementById('illustration').value ='';
+
 
                         window.location.reload();
 

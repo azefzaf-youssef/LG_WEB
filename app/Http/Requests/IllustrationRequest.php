@@ -12,7 +12,8 @@ class IllustrationRequest extends FormRequest
     private $rules = [
         'titre' => 'required|unique:illustration,titre,except,id',
         'langue' => 'required',
-        'illustration' => 'required|mimes:png,jpeg,jpg'
+        'domaine' => 'required',
+        'illustration' => 'required|mimes:png,jpeg,jpg|max:2000'
     ];
 
     /**
@@ -45,6 +46,7 @@ class IllustrationRequest extends FormRequest
 
             'titre' => '" Titre "',
             'langue' => '" Langue "',
+            'domaine' => '" Domaine "',
             'illustration' => '" Illustration "'
 
 

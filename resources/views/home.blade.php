@@ -8,7 +8,6 @@
         @if ($illustrations->count())
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 @foreach ($illustrations as $illustration)
-                @if (count($illustration->getComposantLangueDefault()))
 
                     <div class="col-lg-3">
                         <div class="card mt-2 ">
@@ -38,7 +37,6 @@
                         </div>
 
                     </div>
-                @endif
 
                 @endforeach
 
@@ -46,6 +44,7 @@
             </div>
 
             {!! $illustrations->links() !!}
+
         @else
             <div class="text-center">
                 Aucune donnée disponible

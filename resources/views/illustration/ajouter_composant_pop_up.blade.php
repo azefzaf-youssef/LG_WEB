@@ -14,7 +14,7 @@
                             id="post-description">
                             @csrf
                             <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label" for="basic-default-name">Description</label>
+                                <label class="col-sm-2 col-form-label" for="basic-default-name" id="desc_input">Description</label>
                                 <div class="col-sm-10">
 
                                     <textarea class="form-control" name="titre" id="description"   rows="3" placeholder="Description"></textarea>

@@ -16,14 +16,14 @@
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label" for="basic-default-name">Nom</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="name" id="basic-default-name"
+                                    <input type="text" class="form-control" name="name" id="name"
                                         placeholder="Nom" />
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label" for="basic-default-name">Email</label>
                                 <div class="col-sm-9">
-                                    <input type="email" class="form-control" name="email" id="basic-default-name"
+                                    <input type="email" class="form-control" name="email" id="email"
                                         placeholder="Email" />
                                 </div>
                             </div>
@@ -31,14 +31,14 @@
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label" for="basic-default-name">Mot de passe</label>
                                 <div class="col-sm-9">
-                                    <input type="password" class="form-control" name="password" id="basic-default-name"
+                                    <input type="password" class="form-control" name="password" id="password"
                                         placeholder="Mot de passe" />
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label" for="basic-default-name">Confirmation mot de passe</label>
                                 <div class="col-sm-9">
-                                    <input type="password" class="form-control" name="password_conf" id="basic-default-name"
+                                    <input type="password" class="form-control" name="password_conf" id="password_conf"
                                         placeholder="Confirmation mot de passe" />
                                 </div>
                             </div>
@@ -95,6 +95,11 @@
                         });
 
                         myModal.hide();
+
+
+                        document.getElementById('name').value ='';
+                        document.getElementById('email').value ='';
+
 
                         window.location.reload();
 

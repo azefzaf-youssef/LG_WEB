@@ -4,9 +4,14 @@
 
     @include('illustration.header')
 
-    <div class="container bg-white p-5 rounded shadow ">
-        <h4 class=" pb-4">Termenoligie</h4>
+    <div class="container  p-2 header-block  rounded mb-0  shadow">
+        <span>
+            Ajouter les composants sur l'image :
+        </span>
+    </div>
 
+    <div class="container bg-white p-5 rounded shadow ">
+        <h4 class=" mb-4">Termenoligie</h4>
 
         <div class="row ">
             <div class="col"></div>
@@ -66,6 +71,7 @@
 @section('scripts')
     <script>
         var composant = [];
+        var location ;
         var id_composant = 0;
 
         document.addEventListener("DOMContentLoaded", function() {
@@ -79,7 +85,7 @@
             function deleteComposant(id, old_lines, image, composant) {
 
                 composant = removeDeletedComposantById(id);
-                showComposant(old_lines, image, composant);
+                showComposant(old_lines, image, composant,true);
                 return composant;
 
             }
@@ -90,7 +96,7 @@
                 var XX = event.clientX - rect.left;
                 var YY = event.clientY - rect.top;
 
-                let locations = {
+                locations = {
                     "eventClientX": event.clientX,
                     "eventClientY": event.clientY,
                     "XX": XX,
@@ -99,7 +105,6 @@
 
                 }
 
-                composant.push(locations);
 
             }
 
@@ -115,6 +120,7 @@
             document.getElementById('post-description').addEventListener('submit', function(e) {
 
                 e.preventDefault();
+                composant.push(locations);
 
                 var description_text = document.getElementById('description').value;
                 id_composant++;
@@ -139,6 +145,8 @@
                     });
 
                 }
+
+                document.getElementById('description').value ='';
 
                 myModal.hide();
 

@@ -8,7 +8,7 @@
 
     <div class="container  p-2 header-block  rounded mb-0  shadow">
         <span>
-            Saisir la traduction de composant en <b> {{$langue->langue}}  </b> :
+            Saisir la traduction des composants en <b> {{$langue->langue}}  </b> :
         </span>
     </div>
 
@@ -17,8 +17,8 @@
 
 
         <div class="row  bg-white ">
-            <div class="col  p-0  ">
-                <ul class="list-group rounded-0 ">
+            <div class="col  p-2  ">
+                <ul class="list-group rounded-0 p-2 ">
                     @foreach ($composants as $composant)
                         <li class="list-group-item hover-composant li-composants "><span class="composant-to-edit"
                                 id="composant-{{ $composant->id }}" data-id="{{ $composant->id }}"

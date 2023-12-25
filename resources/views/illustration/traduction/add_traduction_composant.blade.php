@@ -1,14 +1,10 @@
 @extends('layout.master')
 
 @section('content')
-    <div class="container  p-2 header-block  rounded mb-2  shadow">
-        <h4> Titre : <i>{{ $illustration->titre }} </i></h4>
-        Langue : <span>{{ $illustration->langue->langue }}</span><br>
-    </div>
-
+    @include('illustration.header')
     <div class="container  p-2 header-block  rounded mb-0  shadow">
         <span>
-            Saisir la traduction de composant en <b> {{$langue->langue}}  </b> :
+            Saisir la traduction des composants en <b> {{$langue->langue}}  </b> :
         </span>
     </div>
 
@@ -17,7 +13,7 @@
 
 
         <div class="row bg-white ">
-            <div class="col  p-0  ">
+            <div class="col  p-2  ">
                 <ul class="list-group rounded-0 ">
                     @foreach ($composants as $composant)
                         <li class="list-group-item hover-composant li-composants "><span class="composant-to-edit"
@@ -33,7 +29,7 @@
 
 
 
-            <div class=" col-9  bg-white border  ">
+            <div class=" col-9  bg-white border p-2  ">
                 <div class="card card-img " style="left: 16% ;width: fit-content;">
                     <div id="lines" class="container-fluide">
                         <img id="images" onclick="getXandY()" src="{{ asset($illustration->path_illustration) }}"
