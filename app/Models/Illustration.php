@@ -78,6 +78,7 @@ class Illustration extends Model
             'traduction.id_langue as id_langue',
             'langue.langue as langue',
             'users.name as name',
+            'traduction.id_user as id_user',
         ])
         ->get();
     }

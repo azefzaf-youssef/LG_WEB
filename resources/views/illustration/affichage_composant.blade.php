@@ -104,8 +104,9 @@
         document.addEventListener("DOMContentLoaded", function() {
 
             var composant = @json($composants);
-
-            showComposant(null, null, composant);
+            let old_lines = document.getElementById("lines");
+            let image = document.getElementById("images");
+            showComposant(old_lines, image, composant);
 
             var convertToTraductions = document.getElementsByClassName('get-tarduction');
 

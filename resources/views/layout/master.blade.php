@@ -35,7 +35,7 @@
 
 body {
     background-color: #e6e6e6;
-    color: #170657;
+    color: #212529;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
 }
 

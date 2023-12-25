@@ -88,20 +88,15 @@
                 myModal.show();
                 var rect = event.target.getBoundingClientRect();
                 var XX = event.clientX - rect.left;
-                var XX_R = event.clientX - rect.right;
                 var YY = event.clientY - rect.top;
-                let H = window.innerHeight;
-                let W = window.innerWidth;
-                let x = event.clientX;
-                let y = event.clientY;
-
 
                 let locations = {
                     "eventClientX": event.clientX,
                     "eventClientY": event.clientY,
                     "XX": XX,
                     "YY": YY,
-                    "rect": rect
+                    "rect": rect,
+
                 }
 
                 composant.push(locations);
@@ -114,6 +109,7 @@
 
             document.getElementById('images').addEventListener('click', function(e) {
                 getXandY();
+
             });
 
             document.getElementById('post-description').addEventListener('submit', function(e) {
