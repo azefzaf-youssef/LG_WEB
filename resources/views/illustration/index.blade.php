@@ -73,7 +73,7 @@
     </div>
     <div class="md-fab-wrapper">
 
-        <x-carbon-add-filled class="icon-style-btn-Large icon-success  " data-bs-toggle="modal"
+        <x-carbon-add-filled class="icon-style-btn-Large btn-primary-float  " data-bs-toggle="modal"
             data-bs-target="#exampleModal" />
 
     </div>

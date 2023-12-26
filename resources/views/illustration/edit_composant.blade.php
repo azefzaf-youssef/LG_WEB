@@ -41,7 +41,7 @@
 
     <div class="md-fab-wrapper">
 
-        <x-heroicon-s-check-circle class="icon-style-btn-Large icon-success  " id="post-edit-composant"
+        <x-heroicon-s-check-circle class="icon-style-btn-Large btn-primary-float  " id="post-edit-composant"
             data-url="{{ route('USER-LOGGED-POST-EDIT-COMPOSANT-ILUSTRATION') }}"  />
 
 

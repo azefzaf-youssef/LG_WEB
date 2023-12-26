@@ -30,7 +30,7 @@
     </div>
 
     <div class="md-fab-wrapper">
-        <x-heroicon-s-check-circle class="icon-style-btn-Large icon-success " id="post-composant"
+        <x-heroicon-s-check-circle class="icon-style-btn-Large btn-primary-float " id="post-composant"
             data-url="{{ route('USER-LOGGED-POST-ADD-COMPOSANT-ILUSTRATION') }}" />
     </div>
 
